@@ -123,4 +123,15 @@ def save_report(imstack, fout):
     report.close()
     return
 
+def save_registered_stack(imstack,fout):
+    """
+        Saves imstack.stack_registered to fout as bigtiff
+        Appending to any previously stored data at fout
+
+    """
+    with TiffWriter(fout, bigtiff=True, append=True) as tif:
+        for img_slice in range(0,np.size(imstack.stack_registered,2)):
+            tif.save(np.float16(imstack.stack_registered[:,:,img_slice]))
+
+    return
 
