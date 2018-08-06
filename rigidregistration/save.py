@@ -137,7 +137,7 @@ def save_registered_stack(imstack,fout):
 
     with tifffile.TiffWriter(filepath, bigtiff=True, append=True) as tif:
         for img_slice in range(0,np.size(imstack.stack_registered,2)):
-            tif.save(np.float16(imstack.stack_registered[:,:,img_slice]))
+            tif.save(np.float32(imstack.stack_registered[:,:,img_slice]))
 
     return
 
