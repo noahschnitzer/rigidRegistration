@@ -129,7 +129,13 @@ def save_registered_stack(imstack,fout):
         Appending to any previously stored data at fout
 
     """
-    with TiffWriter(fout, bigtiff=True, append=True) as tif:
+
+    if splitext(fout)[1]=='.tif':
+        filepath=fout
+    else:
+        filepath=fout+'.tif'
+
+    with tifffile.TiffWriter(filepath, bigtiff=True, append=True) as tif:
         for img_slice in range(0,np.size(imstack.stack_registered,2)):
             tif.save(np.float16(imstack.stack_registered[:,:,img_slice]))
 
