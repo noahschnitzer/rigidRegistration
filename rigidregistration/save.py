@@ -5,7 +5,7 @@ Save functions for stackregistration.py
 from __future__ import print_function, division, absolute_import
 import numpy as np
 import matplotlib.pyplot as plt
-from os.path import splitext
+from os.path import splitext, isfile
 from matplotlib.patches import Rectangle
 from matplotlib.backends.backend_pdf import PdfPages
 import tifffile
@@ -134,7 +134,8 @@ def save_registered_stack(imstack,fout):
         filepath=fout
     else:
         filepath=fout+'.tif'
-
+    if isfile(filepath):
+        raise IOError('File already exists') 
     with tifffile.TiffWriter(filepath, bigtiff=True, append=True) as tif:
         for img_slice in range(0,np.size(imstack.stack_registered,2)):
             tif.save(np.float32(imstack.stack_registered[:,:,img_slice]))

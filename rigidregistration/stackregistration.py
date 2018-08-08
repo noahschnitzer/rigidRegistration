@@ -676,7 +676,7 @@ class imstack(object):
         Saves imstack.registered_stack as bigtiff, appending to fout using tifffile
         Inputs:
             fout    str     path to output filename.
-                            Appends to existing file if present
+                            
         """
         save.save_registered_stack(self,fout=fout)
         return
